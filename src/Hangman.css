@@ -1,0 +1,198 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+body {
+  background: #6f00ff;
+  background: linear-gradient(45deg, #6f00ff, #8c33ff, #a966ff);
+  background-size: 100% 200%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+}
+
+h1 {
+  font-size: calc(20px + 2vw);
+  margin-bottom: 1vw;
+}
+
+h1,
+p {
+  color: white;
+  font-weight: 100;
+  text-align: center;
+  text-shadow: 0 0 3px white;
+}
+
+p {
+  font-size: calc(10px + 2vw);
+  margin: 0 calc(5px + 1vw);
+}
+
+#man {
+  width: 15%;
+  display: block;
+  margin: auto;
+  -webkit-clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 100% 14%, 70% 14%, 70% 14%, 66% 14%, 66% 14%, 35% 14%, 25% 85%, 100% 90%, 100% 100%);
+          clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 100% 14%, 70% 14%, 70% 14%, 66% 14%, 66% 14%, 35% 14%, 25% 85%, 100% 90%, 100% 100%);
+  -webkit-transition: -webkit-clip-path 0.3s linear;
+  transition: -webkit-clip-path 0.3s linear;
+  transition: clip-path 0.3s linear;
+  transition: clip-path 0.3s linear, -webkit-clip-path 0.3s linear;
+}
+
+@media only screen and (min-width: 1000px) {
+  #man {
+    width: 10%;
+  }
+}
+
+#word {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.row {
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+  margin: 3vh auto;
+}
+
+@media only screen and (min-width: 1000px) {
+  .row {
+    margin: 2vh auto;
+  }
+}
+
+#row1 {
+  -ms-grid-columns: (1fr)[10];
+      grid-template-columns: repeat(10, 1fr);
+  width: 90%;
+}
+
+@media only screen and (min-width: 600px) {
+  #row1 {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  #row1 {
+    width: 60%;
+  }
+}
+
+#row2 {
+  -ms-grid-columns: (1fr)[9];
+      grid-template-columns: repeat(9, 1fr);
+  width: 80%;
+}
+
+@media only screen and (min-width: 600px) {
+  #row2 {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  #row2 {
+    width: 50%;
+  }
+}
+
+#row3 {
+  -ms-grid-columns: (1fr)[7];
+      grid-template-columns: repeat(7, 1fr);
+  width: 60%;
+}
+
+@media only screen and (min-width: 600px) {
+  #row3 {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  #row3 {
+    width: 40%;
+  }
+}
+
+.letter,
+.letter-used {
+  font-size: calc(5px + 2vw);
+  border: none;
+  border-radius: 1vw;
+  padding: 0.8vw;
+  width: 50%;
+  outline: none;
+  -webkit-transition: opacity 1s ease-in-out, -webkit-transform 1s linear;
+  transition: opacity 1s ease-in-out, -webkit-transform 1s linear;
+  transition: transform 1s linear, opacity 1s ease-in-out;
+  transition: transform 1s linear, opacity 1s ease-in-out, -webkit-transform 1s linear;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+.letter {
+  background-color: white;
+  color: black;
+  text-shadow: 0 0 1px black;
+  -webkit-box-shadow: 0 0 5px 1px white;
+          box-shadow: 0 0 5px 1px white;
+  cursor: pointer;
+}
+
+.letter-used {
+  background-color: #eee;
+  opacity: 0.6;
+  color: #777;
+  -webkit-transform: rotateY(360deg);
+          transform: rotateY(360deg);
+}
+
+#genWord {
+  font-size: calc(5px + 2vw);
+  background-color: white;
+  color: black;
+  text-shadow: 0 0 1px black;
+  -webkit-box-shadow: 0 0 5px 1px white;
+          box-shadow: 0 0 5px 1px white;
+  border: none;
+  border-radius: 10px;
+  padding: 1vh 1vw;
+  display: block;
+  width: 40%;
+  margin: 4vh auto 0;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+#genWord:hover {
+  opacity: 0.8;
+}
+
+@media only screen and (min-width: 600px) {
+  #genWord {
+    padding: 0.4em;
+  }
+}
+/*# sourceMappingURL=Hangman.css.map */

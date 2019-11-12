@@ -22,3 +22,5 @@ yarn-error.log*
 
 .gitignore
 /devImages
+debug.log
+key.txt
