@@ -2,8 +2,9 @@
   "name": "hangman",
   "version": "0.1.0",
   "private": true,
-	"homepage": "http://ryanarine.github.io/Hangman",
+  "homepage": "http://ryanarine.github.io/Hangman",
   "dependencies": {
+    "gsap": "^3.0.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0"
@@ -13,8 +14,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-		"predeploy": "npm run build",
-		"deploy": "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

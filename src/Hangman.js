@@ -4,6 +4,7 @@ import Letter from "./Letter";
 import { words } from "./Words";
 import man from "./hangman.svg";
 import { paths } from "./Paths";
+import { gsap } from "gsap";
 
 const offset = 65;
 
@@ -46,24 +47,19 @@ class Hangman extends Component {
     this.type = this.type.bind(this);
     this.mapLetter = this.mapLetter.bind(this);
     this.click = this.click.bind(this);
-    this.getWords = this.getWords.bind(this);
     this.getWord = this.getWord.bind(this);
     this.genWord = this.genWord.bind(this);
     this.hit = this.hit.bind(this);
+    this.didWin = this.didWin.bind(this);
   }
 
   mapLetter(letter) {
     return <Letter key={letter} letter={letter} used={this.state.used[letter]} click={this.click} />;
   }
 
-  getWords() {
-    let words = this.state.word.split(" ");
-    return words.map((word, index) => <p key={index}>{this.getWord(word)}</p>);
-  }
-
-  getWord(word) {
+  getWord() {
+    let word = this.state.word;
     let result = [];
-    let won = true;
     let cap = word.toUpperCase();
     var code;
     if (this.state.over) {
@@ -76,23 +72,17 @@ class Hangman extends Component {
           result.push(word.charAt(i));
         } else {
           result.push(" _ ");
-          won = false;
         }
       } else {
         result.push(word.charAt(i));
       }
-    }
-    if (won) {
-      this.setState({ over: true });
     }
     return result.join("");
   }
 
   genWord() {
     document.getElementById("man").style.clipPath = paths[0];
-    let button = document.getElementById("genWord");
-    button.style.transform = "rotateX(180deg)";
-    setTimeout(() => (button.style.transform = "none"), 500);
+    gsap.fromTo("#genWord", { rotateX: 0, duration: 1 }, { rotateX: 360, duration: 1 });
     this.setState({
       over: false,
       tries: 0,
@@ -133,11 +123,20 @@ class Hangman extends Component {
       document.getElementById("man").style.clipPath = paths[this.state.tries + 1];
       if (this.state.tries + 2 >= paths.length) {
         this.setState({ tries: this.state.tries + 1, over: true });
-        return false;
+        return;
       }
       this.setState({ tries: this.state.tries + 1 });
     }
-    return true;
+  }
+
+  didWin() {
+    if (this.getWord() === this.state.word) {
+      let duration = 5;
+      let opacity = 0;
+      let ease = "Power3.easeOut";
+      gsap.fromTo(".pulse", { scale: 0, opacity: 1, duration: 0 }, { scale: 40, opacity, duration, ease, stagger: 0.5 });
+      this.setState({ over: true });
+    }
   }
 
   render() {
@@ -146,9 +145,14 @@ class Hangman extends Component {
     let row3 = [25, 23, 2, 21, 1, 13, 12].map(this.mapLetter);
     return (
       <div>
+        <div className="pulse"></div>
+        <div className="pulse"></div>
+        <div className="pulse"></div>
         <h1>Hangman</h1>
         <img src={man} id="man" alt="Man on noose" />
-        <div id="word">{this.getWords()}</div>
+        <div id="word">
+          <p>{this.getWord()}</p>
+        </div>
         <div id="row1" className="row">
           {row1}
         </div>
@@ -172,15 +176,15 @@ class Hangman extends Component {
     }
     let index = e.which - offset;
     if (!this.state.over && index >= 0 && index <= 25 && !this.state.used[index]) {
-      if (this.hit(e.which)) {
-        this.setState({ used: { ...this.state.used, [index]: true } });
-      }
+      this.hit(e.which);
+      this.setState({ used: { ...this.state.used, [index]: true } }, this.didWin);
     }
   }
 
   click(letter) {
-    if (!this.state.over && this.hit(letter + offset)) {
-      this.setState({ used: { ...this.state.used, [letter]: true } });
+    if (!this.state.over) {
+      this.hit(letter + offset);
+      this.setState({ used: { ...this.state.used, [letter]: true } }, this.didWin);
     }
   }
 

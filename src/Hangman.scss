@@ -27,6 +27,7 @@ body {
   background-size: 100% 200%;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
+  overflow: hidden;
 }
 
 h1 {
@@ -45,6 +46,18 @@ p {
 p {
   font-size: calc(10px + 2vw);
   margin: 0 calc(5px + 1vw);
+}
+
+.pulse {
+  position: absolute;
+  border: 1px solid white;
+  border-radius: 50%;
+  opacity: 0;
+  left: calc(50% - 26px);
+  top: calc(50% - 26px);
+  width: 25px;
+  height: 25px;
+  z-index: -1;
 }
 
 #man {
@@ -165,7 +178,6 @@ p {
   &:hover {
     opacity: 0.8;
   }
-  transition: all 0.5s ease-in-out;
   @include media($first-media-query) {
     padding: 0.4em;
   }
