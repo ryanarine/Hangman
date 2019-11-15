@@ -123,10 +123,11 @@ class Hangman extends Component {
       document.getElementById("man").style.clipPath = paths[this.state.tries + 1];
       if (this.state.tries + 2 >= paths.length) {
         this.setState({ tries: this.state.tries + 1, over: true });
-        return;
+        return false;
       }
       this.setState({ tries: this.state.tries + 1 });
     }
+    return true;
   }
 
   didWin() {
@@ -176,15 +177,21 @@ class Hangman extends Component {
     }
     let index = e.which - offset;
     if (!this.state.over && index >= 0 && index <= 25 && !this.state.used[index]) {
-      this.hit(e.which);
-      this.setState({ used: { ...this.state.used, [index]: true } }, this.didWin);
+      if (this.hit(e.which)) {
+        this.setState({ used: { ...this.state.used, [index]: true } }, this.didWin);
+      } else {
+        this.setState({ used: { ...this.state.used, [index]: true } });
+      }
     }
   }
 
   click(letter) {
     if (!this.state.over) {
-      this.hit(letter + offset);
-      this.setState({ used: { ...this.state.used, [letter]: true } }, this.didWin);
+      if (this.hit(letter + offset)) {
+        this.setState({ used: { ...this.state.used, [letter]: true } }, this.didWin);
+      } else {
+        this.setState({ used: { ...this.state.used, [letter]: true } });
+      }
     }
   }
 
