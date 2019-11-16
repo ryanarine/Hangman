@@ -145,7 +145,7 @@ class Hangman extends Component {
     let row2 = [0, 18, 3, 5, 6, 7, 9, 10, 11].map(this.mapLetter);
     let row3 = [25, 23, 2, 21, 1, 13, 12].map(this.mapLetter);
     return (
-      <div>
+      <main>
         <div className="pulse"></div>
         <div className="pulse"></div>
         <div className="pulse"></div>
@@ -166,7 +166,7 @@ class Hangman extends Component {
         <button id="genWord" onClick={this.genWord}>
           New Word
         </button>
-      </div>
+      </main>
     );
   }
 
